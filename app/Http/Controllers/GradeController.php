@@ -15,6 +15,7 @@ class GradeController extends Controller
     {
         $grades = Grade::all();
         return view('grades', compact('grades'));
+
     }
 
     /**
