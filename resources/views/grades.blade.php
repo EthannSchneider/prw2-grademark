@@ -18,6 +18,9 @@
     @endforeach
 
     moyenne = {{ $moyenne / count($grades) }}
+
+    <br>
+    <a href="/grades/create">create</a>
 </body>
 
 </html>
