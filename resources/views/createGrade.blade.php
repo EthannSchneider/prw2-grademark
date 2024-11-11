@@ -7,6 +7,12 @@
         <title>Laravel</title>
     </head>
     <body>
-        <h1 class="text-center text-2xl">hello there</h1>
+        <form action="/grades" method="POST" class="flex flex-col align-items-center justify-center">
+            @csrf
+
+            <input required name="value" type="number">
+
+            <input type="submit" name="submit" value="Submit"/>
+        </form>
     </body>
 </html>
