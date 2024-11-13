@@ -12,9 +12,9 @@
     grades = <?= $grade->value ?>
     <br>
 
-    <a href="/grades/{{$grade->id}}/edit">edit</a>
-    <a href="/grades/">list</a>
-    <form action="/grades/{{$grade->id}}" method="POST">
+    <a href="{{ route('grades.edit', $grade->id) }}">edit</a>
+    <a href="{{ route('grades.index') }}">list</a>
+    <form action="{{ route('grades.destroy', $grade->id) }}" method="POST">
         @csrf
         @method('DELETE')
         <input type="submit" value="delete">

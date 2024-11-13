@@ -7,7 +7,7 @@
         <title>Laravel</title>
     </head>
     <body>
-        <form action="/grades" method="POST" class="flex flex-col align-items-center justify-center">
+        <form action="{{ route('grades.store') }}" method="POST" class="flex flex-col align-items-center justify-center">
             @csrf
 
             <input required name="value" type="number">

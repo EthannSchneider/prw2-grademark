@@ -7,7 +7,7 @@
         <title>Laravel</title>
     </head>
     <body>
-        <form action="/grades/{{ $grade->id }}" method="POST" class="flex flex-col align-items-center justify-center">
+        <form action="{{ route('grades.update', ['grade' => $grade]) }}" method="POST" class="flex flex-col align-items-center justify-center">
             @csrf
             @method('PUT')
 

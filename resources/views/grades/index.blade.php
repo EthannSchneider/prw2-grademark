@@ -14,13 +14,13 @@
     ?>
     @foreach ($grades as $grade)
         <?php $moyenne += $grade->value; ?>
-        <a href="/grades/<?= $grade->id ?>">{{$grade->value}}</a> <br>
+        <a href="{{route('grades.show', ['grade'=>$grade->id])}}">{{$grade->value}}</a> <br>
     @endforeach
 
     moyenne = {{ $moyenne / count($grades) }}
 
     <br>
-    <a href="/grades/create">create</a>
+    <a href="{{ route('grades.create') }}">create</a>
 </body>
 
 </html>
