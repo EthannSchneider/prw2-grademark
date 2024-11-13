@@ -37,7 +37,7 @@ class GradeController extends Controller
      */
     public function show(Grade $grade)
     {
-        //
+        return view('grades.show', compact('grade'));
     }
 
     /**
@@ -61,6 +61,5 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
-        //
     }
 }
