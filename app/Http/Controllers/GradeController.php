@@ -21,7 +21,7 @@ class GradeController extends Controller
      */
     public function create()
     {
-        //
+        return view('grades.create');
     }
 
     /**
@@ -29,7 +29,12 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $grade = new Grade();
+        // $grade->value = $request->value;
+        // $grade->save();
+        Grade::create($request->all());
+
+        return redirect(route('grades.index'));
     }
 
     /**
@@ -61,5 +66,8 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
+        $grade->delete();
+
+        return redirect(route('grades.index'));
     }
 }
