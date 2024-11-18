@@ -29,10 +29,7 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        // $grade = new Grade();
-        // $grade->value = $request->value;
-        // $grade->save();
-        Grade::create($request->all());
+        (new Grade($request->all()))->saveOrFail();
 
         return redirect(route('grades.index'));
     }
@@ -58,7 +55,7 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        $grade->update($request->all());
+        $grade->updateOrFail($request->all());
 
         return redirect(route('grades.show', $grade));
     }
