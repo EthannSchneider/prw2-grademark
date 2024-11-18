@@ -17,13 +17,13 @@ class Grade extends Model
 
     protected function withValidator($validator)
     {
-        $value = $this->value;
-        $validator->after(function ($validator) use ($value) {
-            if (fmod($value, 0.5) != 0.0) {
-                $validator->errors()->add(
-                    'value', 'Grade must be rounded on semi-point'
-                );
-            }
-        });
+        $validator->after($this->validateSemiPointValue(...));
+    }
+
+    protected function validateSemiPointValue($validator)
+    {
+        if (fmod($this->value, 0.5) != 0.0) {
+            $validator->errors()->add('value', 'Grade must be rounded on semi-point');
+        }
     }
 }
