@@ -23,7 +23,7 @@ class GradeController extends Controller
      */
     public function create()
     {
-        return view('grades.create');
+        return view('grades.create', ['grade' => new Grade()]);
     }
 
     /**
@@ -65,9 +65,7 @@ class GradeController extends Controller
             'value' => 'required|integer'
         ]);
 
-        $grade->value = $validated["value"];
-
-        $grade->save();
+        $grade->update($validated);
 
         return Redirect::to("/grades/" . $grade->id);
     }

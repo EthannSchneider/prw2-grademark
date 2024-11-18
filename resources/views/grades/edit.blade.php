@@ -7,13 +7,10 @@
         <title>Laravel</title>
     </head>
     <body>
-        <form action="{{ route('grades.update', ['grade' => $grade]) }}" method="POST" class="flex flex-col align-items-center justify-center">
-            @csrf
-            @method('PUT')
-
-            <input required name="value" type="number" value="{{ $grade->value }}">
-
-            <input type="submit" name="submit" value="Submit"/>
-        </form>
+        <?php
+        $route = route('grades.update', ['grade' => $grade]);
+        $method  = 'PUT';
+        ?>
+        @include("grades.forms")
     </body>
 </html>

@@ -7,12 +7,10 @@
         <title>Laravel</title>
     </head>
     <body>
-        <form action="{{ route('grades.store') }}" method="POST" class="flex flex-col align-items-center justify-center">
-            @csrf
-
-            <input required name="value" type="number">
-
-            <input type="submit" name="submit" value="Submit"/>
-        </form>
+        <?php
+        $route = route('grades.store');
+        $method  = 'POST';
+        ?>
+        @include("grades.forms")
     </body>
 </html>
