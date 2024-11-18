@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "589cc0f65c3aaa7d4e9024d545bc1974",
+    "content-hash": "34a93074765e0cfa742b70ad78fc6ff2",
     "packages": [
         {
             "name": "brick/math",
@@ -5552,6 +5552,60 @@
                 }
             ],
             "time": "2022-03-08T17:03:00+00:00"
+        },
+        {
+            "name": "watson/validating",
+            "version": "8.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dwightwatson/validating.git",
+                "reference": "7798363f63d05565ccae01ae95c2227519c1739f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dwightwatson/validating/zipball/7798363f63d05565ccae01ae95c2227519c1739f",
+                "reference": "7798363f63d05565ccae01ae95c2227519c1739f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~9.0|~10.0|~11.0",
+                "illuminate/database": "~9.0|~10.0|~11.0",
+                "illuminate/events": "~9.0|~10.0|~11.0",
+                "illuminate/support": "~9.0|~10.0|~11.0",
+                "illuminate/validation": "~9.0|~10.0|~11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.4",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Watson\\Validating\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dwight Watson",
+                    "email": "dwight@studiousapp.com"
+                }
+            ],
+            "description": "Eloquent model validating trait.",
+            "keywords": [
+                "eloquent",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/dwightwatson/validating/issues",
+                "source": "https://github.com/dwightwatson/validating/tree/8.2.0"
+            },
+            "time": "2024-03-13T21:31:03+00:00"
         },
         {
             "name": "webmozart/assert",
