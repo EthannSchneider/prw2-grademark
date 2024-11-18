@@ -50,7 +50,7 @@ class GradeController extends Controller
      */
     public function edit(Grade $grade)
     {
-        //
+        return view('grades.edit', compact('grade'));
     }
 
     /**
@@ -58,7 +58,9 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        //
+        $grade->update($request->all());
+
+        return redirect(route('grades.show', $grade));
     }
 
     /**
