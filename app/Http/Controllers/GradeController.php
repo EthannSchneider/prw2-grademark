@@ -31,11 +31,7 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'value' => 'required|integer'
-        ]);
-
-        Grade::create($validated);
+        Grade::create($request->all());
 
         return Redirect::to("/grades");
     }
@@ -61,11 +57,7 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        $validated = $request->validate([
-            'value' => 'required|integer'
-        ]);
-
-        $grade->update($validated);
+        $grade->update($request->all());
 
         return Redirect::to("/grades/" . $grade->id);
     }

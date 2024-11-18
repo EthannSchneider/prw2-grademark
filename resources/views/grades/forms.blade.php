@@ -2,7 +2,7 @@
     @csrf
     @method($method)
 
-    <input required name="value" type="number" value="{{ $grade->value }}">
+    <input required name="value" type="number" step=".1" min="1" max="6" value="{{ $grade->value }}">
 
     <input type="submit" name="submit" value="Submit"/>
 </form>
