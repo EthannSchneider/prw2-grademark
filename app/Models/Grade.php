@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grade extends Model
 {
-	use ValidatingTrait;
+    use ValidatingTrait;
 
-	protected $rules = [
-		'value' => 'required|numeric|decimal:0,1|min:1|max:6',
-	];
+    protected $rules = [
+        'value' => 'required|numeric|decimal:0,1|min:1|max:6',
+    ];
 
     protected $fillable = ['value'];
 
