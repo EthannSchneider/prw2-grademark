@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class GradeController extends Controller
 {
@@ -15,7 +14,6 @@ class GradeController extends Controller
     {
         $grades = Grade::all();
         return view('grades.index', compact('grades'));
-
     }
 
     /**
@@ -31,9 +29,9 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        Grade::create($request->all());
+        (new Grade($request->all()))->saveOrFail();
 
-        return Redirect::to("/grades");
+        return redirect(route('grades.index'));
     }
 
     /**
@@ -57,9 +55,9 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
-        $grade->update($request->all());
+        $grade->updateOrFail($request->all());
 
-        return Redirect::to("/grades/" . $grade->id);
+        return redirect(route('grades.show', $grade));
     }
 
     /**
@@ -69,6 +67,6 @@ class GradeController extends Controller
     {
         $grade->delete();
 
-        return Redirect::to("/grades");
+        return redirect(route('grades.index'));
     }
 }
