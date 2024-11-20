@@ -15,6 +15,16 @@ class Grade extends Model
 
     protected $fillable = ['value'];
 
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected function withValidator($validator)
     {
         $validator->after($this->validateSemiPointValue(...));
