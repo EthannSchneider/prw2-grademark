@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grade;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class GradeController extends Controller
@@ -21,7 +22,7 @@ class GradeController extends Controller
      */
     public function create()
     {
-        return view('grades.create', ['grade' => new Grade()]);
+        return view('grades.create', ['grade' => new Grade(), 'courses' => Course::all()]);
     }
 
     /**
@@ -47,7 +48,8 @@ class GradeController extends Controller
      */
     public function edit(Grade $grade)
     {
-        return view('grades.edit', compact('grade'));
+        $courses = Course::all();
+        return view('grades.edit', compact('grade', 'courses'));
     }
 
     /**

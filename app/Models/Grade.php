@@ -13,7 +13,7 @@ class Grade extends Model
         'value' => 'required|numeric|decimal:0,1|min:1|max:6',
     ];
 
-    protected $fillable = ['value'];
+    protected $fillable = ['value', 'course_id'];
 
     public function course()
     {

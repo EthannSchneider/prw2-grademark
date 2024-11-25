@@ -3,4 +3,10 @@
 @error('value')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
+<select name="course_id">
+    <option value=""></option>
+    @foreach ($courses as $course)
+        <option value="{{ $course->id }}" @if ($grade->course == $course) selected @endif>{{ $course->name }}</option>
+    @endforeach
+</select>
 <button>Vas-<b>y</b></button>
