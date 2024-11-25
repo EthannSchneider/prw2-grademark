@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GradeController extends Controller
 {
@@ -30,7 +31,9 @@ class GradeController extends Controller
      */
     public function store(Request $request)
     {
-        (new Grade($request->all()))->saveOrFail();
+        $grade = new Grade($request->all());
+        $grade->user()->associate(Auth::user());
+        $grade->saveOrFail();
 
         return redirect(route('grades.index'));
     }
