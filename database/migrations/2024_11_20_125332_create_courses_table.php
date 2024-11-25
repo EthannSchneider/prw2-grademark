@@ -18,8 +18,8 @@ return new class extends Migration
         });
 
         Schema::table('grades', function (Blueprint $table) {
-            $table->foreignId('course_id')->nullable()->constrained();
-            $table->foreignId('user_id');
+            $table->foreignId('course_id')->constrained()->onDelete("cascade");
+            $table->foreignId('user_id')->constrained()->onDelete("cascade");;
         });
     }
 
@@ -30,6 +30,7 @@ return new class extends Migration
     {
         Schema::table('grades', function (Blueprint $table) {
             $table->dropForeign(['course_id']);
+            $table->dropForeign(['user_id']);
             $table->dropColumn('course_id');
             $table->dropColumn('user_id');
         });
