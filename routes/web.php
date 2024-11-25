@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
 use App\Http\Controllers\GradeController;
 
 Route::get('/', function () {
-    return redirect(route('grades.index'));
+    return redirect(route('dashboard'));
 });
 
 Route::get('/dashboard', function () {
@@ -17,7 +18,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('grades', GradeController::class);
+    Route::resource('courses', controller: CourseController::class);
+
+    Route::prefix('courses/{course}/')->group(function () {
+        Route::resource('grades', GradeController::class);
+    });
 });
 
 require __DIR__.'/auth.php';

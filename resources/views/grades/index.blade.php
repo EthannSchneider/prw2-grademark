@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<?php
+$moyenne = 0;
+?>
+@foreach ($grades as $grade)
+<?php $moyenne += $grade->value; ?>
+<a href="{{route('grades.show', ['grade'=>$grade->id, 'course' => $course->id])}}">{{$grade->value}}</a> <br>
+@endforeach
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite('resources/css/app.css')
-    <title>Laravel</title>
-</head>
-
-<body>
-    <?php
-    $moyenne = 0;
-    ?>
-    @foreach ($grades as $grade)
-    <?php $moyenne += $grade->value; ?>
-    <a href="{{route('grades.show', ['grade'=>$grade->id])}}">{{$grade->value}}</a> <br>
-    @endforeach
-
+@if (count($grades) > 0)
     moyenne = {{ $moyenne / count($grades) }}
+@endif
 
-    <br>
-    <a href="{{ route('grades.create') }}">create</a>
-</body>
-
-</html>
+<br>
+<a href="{{ route('grades.create', ['course' => $course->id]) }}">create</a>
+<a href="{{ route('courses.show', ['course' => $course->id])}}">back</a>
