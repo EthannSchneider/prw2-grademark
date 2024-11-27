@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\Course;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,7 +38,7 @@ class GradeController extends Controller
         $grades->user()->associate(Auth::user());
         $grades->saveOrFail();
 
-        return redirect(route('grades.index', compact('course')));
+        return redirect(route('courses.grades.index', compact('course')));
     }
 
     /**
@@ -63,7 +64,7 @@ class GradeController extends Controller
     {
         $grade->updateOrFail($request->all());
 
-        return redirect(route('grades.show', compact('grade', 'course')));
+        return redirect(route('courses.grades.show', compact('grade', 'course')));
     }
 
     /**
@@ -73,6 +74,6 @@ class GradeController extends Controller
     {
         $grade->delete();
 
-        return redirect(route('grades.index', $course));
+        return redirect(route('courses.grades.index', $course));
     }
 }

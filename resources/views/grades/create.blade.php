@@ -1,6 +1,6 @@
 <x-app-layout>
     <?php
-    $route = route('grades.store', ['course' => $course->id]);
+    $route = route('courses.grades.store', ['course' => $course->id]);
     $method  = 'POST';
     ?>
     @include("grades.forms")

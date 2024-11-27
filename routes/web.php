@@ -20,9 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('courses', controller: CourseController::class);
 
-    Route::prefix('courses/{course}/')->group(function () {
-        Route::resource('grades', GradeController::class);
-    });
+    Route::resource('courses.grades', GradeController::class);
 });
 
 require __DIR__.'/auth.php';
