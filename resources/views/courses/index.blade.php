@@ -7,7 +7,7 @@
     <div class="flex flex-col content-center">
         <ul>
             @foreach ($courses as $course)
-            <li><a href="{{route('courses.show', ['course'=>$course->id])}}">{{$course->name}}</a></li>
+            <li><a href="{{route('courses.show', ['course'=>$course])}}">{{$course->name}}</a></li>
             @endforeach
             <br>
         </ul>
