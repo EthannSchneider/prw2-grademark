@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Watson\Validating\ValidatingTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Grade extends Model
 {
@@ -25,9 +26,14 @@ class Grade extends Model
         return $this->belongsTo(User::class);
     }
 
-    public static function fromUser($user)
+    public function scopeFromUser(Builder $query, $user)
     {
-        return self::all()->where('user_id', $user->id);
+        $query->where('user_id', $user->id);
+    }
+
+    public function scopeFromCourse(Builder $query, $course)
+    {
+        $query->where('course_id', $course->id);
     }
 
     protected function withValidator($validator)

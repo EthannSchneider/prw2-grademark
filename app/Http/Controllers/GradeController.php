@@ -14,7 +14,7 @@ class GradeController extends Controller
      */
     public function index(Course $course)
     {
-        $grades = Grade::fromUser(Auth::user());
+        $grades = Grade::fromUser(Auth::user())->fromCourse($course)->get();
         return view('grades.index', ['grades' => $grades, 'course' => $course]);
     }
 
