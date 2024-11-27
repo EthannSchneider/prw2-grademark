@@ -25,6 +25,11 @@ class Grade extends Model
         return $this->belongsTo(User::class);
     }
 
+    public static function fromUser($user)
+    {
+        return self::all()->where('user_id', $user->id);
+    }
+
     protected function withValidator($validator)
     {
         $validator->after($this->validateSemiPointValue(...));
