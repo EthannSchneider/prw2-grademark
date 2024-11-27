@@ -17,7 +17,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('courses.grades', GradeController::class);
+    Route::resource('courses.grades', GradeController::class)->except('create', 'store');
+    Route::resource('grades', GradeController::class)->only('create', 'store');
 });
 
 require __DIR__.'/auth.php';

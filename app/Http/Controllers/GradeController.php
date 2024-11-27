@@ -21,21 +21,21 @@ class GradeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Course $course)
+    public function create()
     {
-        return view('grades.create', ['grade' => new Grade(), 'course' => $course, 'courses' => Course::all()]);
+        return view('grades.create', ['grade' => new Grade(), 'courses' => Course::all()]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Course $course, Request $request)
+    public function store(Request $request)
     {
         $grade = new Grade($request->all());
         $grade->user()->associate(Auth::user());
         $grade->saveOrFail();
 
-        return redirect(route('courses.grades.index', $course));
+        return redirect(route('courses.grades.index', $grade->course));
     }
 
     /**
