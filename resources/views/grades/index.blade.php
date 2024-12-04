@@ -3,8 +3,13 @@
     $moyenne = 0;
     ?>
     @foreach ($grades as $grade)
-    <?php $moyenne += $grade->value; ?>
-    <a href="{{route('grades.show', ['grade'=>$grade])}}">{{$grade->value}}</a> <br>
+    <?php $moyenne += $grade->value * $grade->weight; ?>
+    <a href="{{route('grades.show', ['grade'=>$grade])}}">
+        @if (!isset($course))
+            {{$grade->course->name}}: 
+        @endif
+        {{$grade->value}}
+    </a> <br>
     @endforeach
 
     @if (count($grades) > 0)

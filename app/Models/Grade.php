@@ -11,9 +11,10 @@ class Grade extends Model
 
     protected $rules = [
         'value' => 'required|numeric|decimal:0,1|min:1|max:6',
+        'weight' => 'required|numeric|decimal:0,1|min:0|max:1',
     ];
 
-    protected $fillable = ['value'];
+    protected $fillable = ['value', 'weight'];
 
     public function course()
     {
