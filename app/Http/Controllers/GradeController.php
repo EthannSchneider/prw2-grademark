@@ -13,8 +13,13 @@ class GradeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Course $course)
+    public function index(Course $course = null)
     {
+        if ($course === null) {
+            $grades = Grade::whereBelongsTo(Auth::user())->get();
+            return view('grades.index', compact('grades'));
+        }
+
         $grades = Grade::whereBelongsTo($course)->get();
         
         return view('grades.index', compact('grades', 'course'));

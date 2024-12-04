@@ -21,7 +21,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('courses', CourseController::class);
 
     Route::resource('courses.grades', controller: GradeController::class)->only('index', 'create', 'store');
-    Route::resource('grades', GradeController::class)->except('index', 'create', 'store');
+    Route::resource('grades', GradeController::class)->except('create', 'store');
 });
 
 require __DIR__.'/auth.php';

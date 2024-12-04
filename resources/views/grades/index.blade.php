@@ -12,6 +12,8 @@
     @endif
 
     <br>
-    <a href="{{ route('courses.grades.create', ['course' => $course]) }}">create</a>
-    <a href="{{ route('courses.show', ['course' => $course])}}">cours</a>
+    @if (isset($course))
+        <a href="{{ route('courses.grades.create', ['course' => $course]) }}">create</a>
+        <a href="{{ route('courses.show', ['course' => $course])}}">cours</a>
+    @endif
 </x-app-layout>
