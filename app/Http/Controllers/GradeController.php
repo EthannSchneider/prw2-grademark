@@ -51,7 +51,8 @@ class GradeController extends Controller
      */
     public function show(Course $course, Grade $grade)
     {
-        return view('grades.show', compact('grade'));
+        $is_mine = $grade->user()->is(Auth::user());
+        return view('grades.show', compact('grade', 'is_mine'));
     }
 
     /**
@@ -59,6 +60,9 @@ class GradeController extends Controller
      */
     public function edit(Grade $grade)
     {
+        if ($grade->user()->isNot(Auth::user())) {
+            abort(403);
+        }
         return view('grades.edit', compact('grade'));
     }
 
@@ -67,6 +71,9 @@ class GradeController extends Controller
      */
     public function update(Request $request, Grade $grade)
     {
+        if ($grade->user()->isNot(Auth::user())) {
+            abort(403);
+        }
         $grade->updateOrFail($request->all());
 
         return redirect(route('grades.show', compact('grade')));
@@ -77,8 +84,11 @@ class GradeController extends Controller
      */
     public function destroy(Grade $grade)
     {
+        if ($grade->user()->isNot(Auth::user())) {
+            abort(403);
+        }
         $grade->delete();
 
-        return redirect(route('courses.index'));
+        return redirect(route('grades.index'));
     }
 }
