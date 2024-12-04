@@ -1,6 +1,6 @@
 <x-app-layout>
     <?php
-    $route = route('courses.grades.update', ['grade' => $grade, 'course' => $course]);
+    $route = route('grades.update', ['grade' => $grade]);
     $method  = 'PUT';
     ?>
     @include("grades.forms")

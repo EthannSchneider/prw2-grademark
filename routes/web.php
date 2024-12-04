@@ -18,9 +18,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('courses', controller: CourseController::class);
+    Route::resource('courses', CourseController::class);
 
-    Route::resource('courses.grades', GradeController::class);
+    Route::resource('courses.grades', controller: GradeController::class)->only('index', 'create', 'store');
+    Route::resource('grades', GradeController::class)->except('index', 'create', 'store');
 });
 
 require __DIR__.'/auth.php';

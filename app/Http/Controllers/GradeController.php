@@ -46,34 +46,34 @@ class GradeController extends Controller
      */
     public function show(Course $course, Grade $grade)
     {
-        return view('grades.show', compact('grade', 'course'));
+        return view('grades.show', compact('grade'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course, Grade $grade)
+    public function edit(Grade $grade)
     {
-        return view('grades.edit', compact('grade', 'course'));
+        return view('grades.edit', compact('grade'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course, Grade $grade)
+    public function update(Request $request, Grade $grade)
     {
         $grade->updateOrFail($request->all());
 
-        return redirect(route('courses.grades.show', compact('grade', 'course')));
+        return redirect(route('grades.show', compact('grade')));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course, Grade $grade)
+    public function destroy(Grade $grade)
     {
         $grade->delete();
 
-        return redirect(route('courses.grades.index', $course));
+        return redirect(route('courses.index'));
     }
 }

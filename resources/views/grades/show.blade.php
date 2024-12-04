@@ -2,9 +2,9 @@
     grades = <?= $grade->value ?>
     <br>
 
-    <a href="{{ route('courses.grades.edit', ['grade' => $grade, 'course' => $course]) }}">edit</a>
-    <a href="{{ route('courses.grades.index', ['course' => $course]) }}">list</a>
-    <form action="{{ route('courses.grades.destroy', ['grade' => $grade, 'course' => $course])}}" method="POST">
+    <a href="{{ route('grades.edit', ['grade' => $grade]) }}">edit</a>
+    <a href="{{ url()->previous() }}">back</a>
+    <form action="{{ route('grades.destroy', ['grade' => $grade])}}" method="POST">
         @csrf
         @method('DELETE')
         <input type="submit" value="delete">

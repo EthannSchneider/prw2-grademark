@@ -4,7 +4,7 @@
     ?>
     @foreach ($grades as $grade)
     <?php $moyenne += $grade->value; ?>
-    <a href="{{route('courses.grades.show', ['grade'=>$grade, 'course' => $course])}}">{{$grade->value}}</a> <br>
+    <a href="{{route('grades.show', ['grade'=>$grade])}}">{{$grade->value}}</a> <br>
     @endforeach
 
     @if (count($grades) > 0)
@@ -13,5 +13,5 @@
 
     <br>
     <a href="{{ route('courses.grades.create', ['course' => $course]) }}">create</a>
-    <a href="{{ route('courses.show', ['course' => $course])}}">back</a>
+    <a href="{{ route('courses.show', ['course' => $course])}}">cours</a>
 </x-app-layout>
