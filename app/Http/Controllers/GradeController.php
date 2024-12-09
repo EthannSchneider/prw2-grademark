@@ -68,10 +68,10 @@ class GradeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course, Grade $grade)
+    public function destroy(Grade $grade)
     {
         $grade->delete();
 
-        return redirect(route('courses.grades.index', $course));
+        return back();
     }
 }
