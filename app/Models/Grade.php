@@ -26,6 +26,11 @@ class Grade extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function newCollection(array $models = [])
+    {
+        return new GradeCollection($models);
+    }
+
     protected function withValidator($validator)
     {
         $validator->after($this->validateSemiPointValue(...));
@@ -36,5 +41,14 @@ class Grade extends Model
         if (fmod($this->value, 0.5) != 0.0) {
             $validator->errors()->add('value', 'Grade must be rounded on semi-point');
         }
+    }
+}
+
+class GradeCollection extends \Illuminate\Database\Eloquent\Collection
+{
+    public function mean()
+    {
+        [$sum, $weight] = $this->reduceSpread(fn($sum, $weight, $grade) => [$sum + $grade->value * $grade->weight, $weight + $grade->weight], 0, 0);
+        return $sum / $weight;
     }
 }
