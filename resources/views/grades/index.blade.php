@@ -1,9 +1,5 @@
 <x-app-layout>
-    <?php
-    $moyenne = 0;
-    ?>
     @foreach ($grades as $grade)
-    <?php $moyenne += $grade->value * $grade->weight; ?>
     <a href="{{route('grades.show', ['grade'=>$grade])}}">
         @if (!isset($course))
             {{$grade->course->name}}: 
@@ -12,9 +8,7 @@
     </a> <br>
     @endforeach
 
-    @if (count($grades) > 0)
-        moyenne = {{ $moyenne / count($grades) }}
-    @endif
+    moyenne = {{ $grades->mean() }}
 
     <br>
     @if (isset($course))

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\Course;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,12 +15,12 @@ class GradeController extends Controller
     public function index(Course $course = null)
     {
         if ($course === null) {
-            $grades = Grade::whereBelongsTo(Auth::user())->get();
+            $grades = Auth::user()->grades;
             return view('grades.index', compact('grades'));
         }
 
-        $grades = Grade::whereBelongsTo($course)->get();
-        
+        $grades = $course->grades;
+
         return view('grades.index', compact('grades', 'course'));
     }
 
