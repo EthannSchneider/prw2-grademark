@@ -1,5 +1,6 @@
 <label for="value">Valeur:</label>
 <input name="value" id="value" value="{{ $grade->value }}" class="@error('value') is-invalid @enderror">
+<input name="weight" id="weight" value="{{ $grade->weight }}" class="@error('weight') is-invalid @enderror">
 @error('value')
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror

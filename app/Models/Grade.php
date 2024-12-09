@@ -14,7 +14,7 @@ class Grade extends Model
         'value' => 'required|numeric|decimal:0,1|min:1|max:6',
     ];
 
-    protected $fillable = ['value', 'course_id'];
+    protected $fillable = ['value', 'weight', 'course_id'];
 
     public function course()
     {
@@ -46,5 +46,19 @@ class Grade extends Model
         if (fmod($this->value, 0.5) != 0.0) {
             $validator->errors()->add('value', 'Grade must be rounded on semi-point');
         }
+    }
+
+    public function newCollection(array $models = [])
+    {
+        return new GradeCollection($models);
+    }
+}
+
+class GradeCollection extends \Illuminate\Database\Eloquent\Collection
+{
+    public function mean()
+    {
+        [$sum, $weight] = $this->reduceSpread(fn($sum, $weight, $grade) => [$sum + $grade->value * $grade->weight, $weight + $grade->weight], 0, 0);
+        return $sum / $weight;
     }
 }
