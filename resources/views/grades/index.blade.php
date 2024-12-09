@@ -12,3 +12,5 @@
   </li>
 @endforeach
 </ul>
+<h3>Moyenne</h3>
+{{ $grades->mean() }}
