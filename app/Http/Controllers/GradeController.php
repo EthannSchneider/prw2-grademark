@@ -62,7 +62,7 @@ class GradeController extends Controller
     {
         $grade->updateOrFail($request->all());
 
-        return redirect(route('courses.grades.show', [$course, $grade]));
+        return redirect(route('grades.show', $grade));
     }
 
     /**
