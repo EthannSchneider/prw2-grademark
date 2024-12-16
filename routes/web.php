@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('grades', GradeController::class)->only('create', 'store');
     Route::resource('courses.grades', GradeController::class)->except('create', 'store')->shallow();
+    Route::resource('students', StudentController::class)->only('index', 'show');
 });
 
 require __DIR__.'/auth.php';
