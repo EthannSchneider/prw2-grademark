@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('courses.grades', controller: GradeController::class)->only('index', 'create', 'store');
     Route::resource('grades', GradeController::class)->except('create', 'store');
+
+    Route::get('/grades/{grade}/download', [GradeController::class, 'download'])->name('grades.download');
 });
 
 require __DIR__.'/auth.php';

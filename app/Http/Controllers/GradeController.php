@@ -6,6 +6,7 @@ use App\Models\Grade;
 use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class GradeController extends Controller
 {
@@ -42,6 +43,12 @@ class GradeController extends Controller
         $grades->user()->associate(Auth::user());
         $grades->saveOrFail();
 
+        if($request->hasFile('pdf-file')) {
+            $path = $request->file('pdf-file')->store('grades_files');
+            $grades->file_path = $path;
+            $grades->save();
+        }
+
         return redirect(route('courses.grades.index', compact('course')));
     }
 
@@ -75,6 +82,12 @@ class GradeController extends Controller
         }
         $grade->updateOrFail($request->all());
 
+        if($request->hasFile('pdf-file')) {
+            $path = $request->file('pdf-file')->store('grades_files');
+            $grade->file_path = $path;
+            $grade->save();
+        }
+
         return redirect(route('grades.show', compact('grade')));
     }
 
@@ -89,5 +102,17 @@ class GradeController extends Controller
         $grade->delete();
 
         return redirect(route('grades.index'));
+    }
+
+    /**
+     * Download the file.
+     */
+    public function download(Grade $grade)
+    {
+        if ($grade->file_path === null) {
+            abort(404);
+        }
+
+        return response()->download(Storage::disk()->path($grade->file_path), $grade->value . ".pdf");
     }
 }

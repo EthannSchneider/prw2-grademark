@@ -14,7 +14,7 @@ class Grade extends Model
         'weight' => 'required|numeric|decimal:0,1|min:0|max:1',
     ];
 
-    protected $fillable = ['value', 'weight'];
+    protected $fillable = ['value', 'weight', 'file_path'];
 
     public function course()
     {
