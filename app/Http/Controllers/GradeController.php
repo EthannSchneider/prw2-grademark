@@ -47,24 +47,24 @@ class GradeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course, Grade $grade)
+    public function show(Grade $grade)
     {
-        return view('grades.show', compact('grade', 'course'));
+        return view('grades.show', compact('grade'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course, Grade $grade)
+    public function edit(Grade $grade)
     {
         $courses = Course::all();
-        return view('grades.edit', compact('grade', 'course', 'courses'));
+        return view('grades.edit', compact('grade', 'courses'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Course $course, Grade $grade, Request $request)
+    public function update(Grade $grade, Request $request)
     {
         $grade->updateOrFail($request->all());
 
