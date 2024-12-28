@@ -1,3 +1,6 @@
+<x-app-layout>
+<div class="max-w-7xl mx-auto sm:px-4 lg:px-4 mt-4"><div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4">
+
 <h2>{{ $course->name }} grades</h2>
 
 <ul>
@@ -14,3 +17,6 @@
 </ul>
 <h3>Moyenne</h3>
 {{ $grades->mean() }}
+
+</div></div>
+</x-app-layout>
