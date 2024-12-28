@@ -21,14 +21,9 @@ class Grade extends Model
         return $this->belongsTo(Course::class);
     }
 
-    public function user()
+    public function student()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function scopeFromUser(Builder $query, $user)
-    {
-        $query->where('user_id', $user->id);
+        return $this->belongsTo(Student::class, 'user_id');
     }
 
     public function scopeFromCourse(Builder $query, $course)

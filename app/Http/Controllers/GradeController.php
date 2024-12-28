@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Grade;
 use App\Models\Course;
+use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,7 +12,7 @@ class GradeController extends Controller
 {
     public function courseIndex(Course $course)
     {
-        $grades = Grade::fromUser(Auth::user())->fromCourse($course)->get();
+        $grades = Student::find(Auth::id())->grades()->fromCourse($course)->get();
         return view('grades.course_index', ['grades' => $grades, 'course' => $course]);
     }
 
@@ -20,7 +21,7 @@ class GradeController extends Controller
      */
     public function index()
     {
-        $grades = Grade::fromUser(Auth::user())->get();
+        $grades = Student::find(Auth::id())->grades;
         return view('grades.index', ['grades' => $grades]);
     }
 
@@ -38,7 +39,7 @@ class GradeController extends Controller
     public function store(Request $request)
     {
         $grade = new Grade($request->all());
-        $grade->user()->associate(Auth::user());
+        $grade->student()->associate(Auth::user());
         $grade->saveOrFail();
 
         return redirect(route('courses.grades.index', $grade->course));
