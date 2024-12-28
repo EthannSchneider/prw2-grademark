@@ -9,13 +9,19 @@ use Illuminate\Support\Facades\Auth;
 
 class GradeController extends Controller
 {
+    public function courseIndex(Course $course)
+    {
+        $grades = Grade::fromUser(Auth::user())->fromCourse($course)->get();
+        return view('grades.course_index', ['grades' => $grades, 'course' => $course]);
+    }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Course $course)
+    public function index()
     {
-        $grades = Grade::fromUser(Auth::user())->fromCourse($course)->get();
-        return view('grades.index', ['grades' => $grades, 'course' => $course]);
+        $grades = Grade::fromUser(Auth::user())->get();
+        return view('grades.index', ['grades' => $grades]);
     }
 
     /**

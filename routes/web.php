@@ -18,8 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('grades', GradeController::class)->only('create', 'store');
-    Route::resource('courses.grades', GradeController::class)->except('create', 'store')->shallow();
+    Route::get('/courses/{course}/grades', [GradeController::class, 'courseIndex'])->name('courses.grades.index');
+    Route::resource('grades', GradeController::class);
     Route::resource('students', StudentController::class)->only('index', 'show');
 });
 
