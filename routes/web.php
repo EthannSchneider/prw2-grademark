@@ -6,7 +6,7 @@ use App\Http\Controllers\GradeController;
 use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('dashboard'));
 });
 
 Route::get('/dashboard', function () {
