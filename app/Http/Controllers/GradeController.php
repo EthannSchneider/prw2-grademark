@@ -7,8 +7,9 @@ use App\Models\Course;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class GradeController extends Controller
+class GradeController extends Controller implements HasMiddleware
 {
     public function courseIndex(Course $course)
     {
@@ -80,5 +81,15 @@ class GradeController extends Controller
         $grade->delete();
 
         return back();
+    }
+
+    public static function middleware()
+    {
+        return [
+            function (Request $request, \Closure $next) {
+                Student::find(Auth::id());
+                return $next($request);
+            },
+        ];
     }
 }
