@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    protected static function booted(): void
+    {
+        static::retrieved(function (User $user) {
+            $called_class = get_called_class();
+            if ($called_class != 'App\Models\User' && $called_class != $user->type) {
+                throw new \Illuminate\Database\Eloquent\ModelNotFoundException("Type mismatch");
+            }
+        });
+    }
 }
