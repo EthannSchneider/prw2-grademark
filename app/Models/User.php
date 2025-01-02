@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -48,10 +49,10 @@ class User extends Authenticatable
 
     protected static function booted(): void
     {
-        static::retrieved(function (User $user) {
+        static::addGlobalScope('ensure_type', function (Builder $builder) {
             $called_class = get_called_class();
-            if ($called_class != 'App\Models\User' && $called_class != $user->type) {
-                throw new \Illuminate\Database\Eloquent\ModelNotFoundException("Type mismatch");
+            if ($called_class != 'App\Models\User') {
+                $builder->where('type', $called_class);
             }
         });
     }

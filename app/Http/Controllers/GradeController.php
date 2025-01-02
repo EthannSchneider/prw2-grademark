@@ -87,7 +87,7 @@ class GradeController extends Controller implements HasMiddleware
     {
         return [
             function (Request $request, \Closure $next) {
-                Student::find(Auth::id());
+                Student::findOrFail(Auth::id());
                 return $next($request);
             },
         ];
