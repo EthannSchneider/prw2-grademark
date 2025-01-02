@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
+use App\Models\Manager;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -21,5 +22,15 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         return view('students.show', compact('student'));
+    }
+
+    public static function middleware()
+    {
+        return [
+            function (Request $request, \Closure $next) {
+                Manager::findOrFail(Auth::id());
+                return $next($request);
+            },
+        ];
     }
 }
