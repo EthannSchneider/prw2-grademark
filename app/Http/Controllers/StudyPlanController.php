@@ -12,7 +12,7 @@ class StudyPlanController extends Controller
      */
     public function index()
     {
-        //
+        return view('study_plans.index', ['studyPlans' => StudyPlan::all()]);
     }
 
     /**
@@ -20,7 +20,7 @@ class StudyPlanController extends Controller
      */
     public function create()
     {
-        //
+        return view('study_plans.create', ['studyPlan' => new StudyPlan]);
     }
 
     /**
@@ -28,7 +28,10 @@ class StudyPlanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $studyPlan = new StudyPlan($request->all());
+        $studyPlan->saveOrFail();
+
+        return redirect(route('study_plans.index'));
     }
 
     /**
