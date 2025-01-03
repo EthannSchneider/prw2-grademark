@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\StudyPlan;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class StudyPlanController extends Controller
@@ -39,7 +40,8 @@ class StudyPlanController extends Controller
      */
     public function show(StudyPlan $studyPlan)
     {
-        //
+        $availableCourses = Course::available()->get();
+        return view('study_plans.show', compact('studyPlan', 'availableCourses'));
     }
 
     /**
@@ -47,6 +49,7 @@ class StudyPlanController extends Controller
      */
     public function update(Request $request, StudyPlan $studyPlan)
     {
-        //
+        $studyPlan->coursesSync($request->courses);
+        return redirect(route('study_plans.show', $studyPlan));
     }
 }

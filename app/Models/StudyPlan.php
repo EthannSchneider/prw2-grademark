@@ -19,4 +19,11 @@ class StudyPlan extends Model
     {
         return $this->hasMany(Course::class);
     }
+
+    public function coursesSync($ids)
+    {
+        $ids = collect($ids);
+        $this->courses()->whereNotIn('id', $ids)->update(['study_plan_id' => null]);
+        Course::whereIn('id', $ids)->update(['study_plan_id' => $this->id]);
+    }
 }

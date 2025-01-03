@@ -22,7 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/courses/{course}/grades', [GradeController::class, 'courseIndex'])->name('courses.grades.index');
     Route::resource('grades', GradeController::class);
     Route::resource('students', StudentController::class)->only('index', 'show');
-    Route::resource('study_plans', StudyPlanController::class)->except('update', 'destroy');
+    Route::resource('study_plans', StudyPlanController::class)->except('edit', 'destroy');
 });
 
 require __DIR__.'/auth.php';
