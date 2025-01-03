@@ -49,7 +49,11 @@ class StudyPlanController extends Controller
      */
     public function update(Request $request, StudyPlan $studyPlan)
     {
-        $studyPlan->coursesSync($request->courses);
+        if ($request->name) {
+            $studyPlan->courses()->create($request->all());
+        } else {
+            $studyPlan->coursesSync($request->courses);
+        }
         return redirect(route('study_plans.show', $studyPlan));
     }
 }

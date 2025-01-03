@@ -24,5 +24,16 @@
     <button>Modifier</button>
 </form>
 
+<form action="{{ route('study_plans.update', $studyPlan) }}" method="post">
+    @csrf
+    @method('put')
+    <label for="name">Nom:</label>
+    <input name="name" id="name" class="@error('name') is-invalid @enderror">
+    @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+    <button>Ajouter</button>
+</form>
+
 </div></div>
 </x-app-layout>
