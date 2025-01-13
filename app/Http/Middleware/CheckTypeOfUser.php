@@ -20,7 +20,7 @@ class CheckTypeOfUser
     {
         $user = Auth::user();
         if ($user->type !== $role) {
-            abort(403, 'Role unautorized');
+            abort(403, 'Role unauthorized');
         }
 
         return $next($request);
