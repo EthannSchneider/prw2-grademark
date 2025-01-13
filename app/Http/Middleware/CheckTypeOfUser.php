@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 
-
 class CheckTypeOfUser
 {
     /**
@@ -19,10 +18,9 @@ class CheckTypeOfUser
      */
     public function handle(Request $request, Closure $next, string $role)
     {
-
         $user = Auth::user();
         if ($user->type !== $role) {
-            abort(403, 'Accès interdit : rôle non autorisé.');
+            abort(403, 'Role unautorized');
         }
 
         return $next($request);
