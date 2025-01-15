@@ -12,7 +12,8 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $best_student = \App\Models\Student::bestStudent();
+    return view('dashboard', compact('best_student'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
