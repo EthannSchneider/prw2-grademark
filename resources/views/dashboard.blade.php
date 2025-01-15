@@ -14,7 +14,15 @@
         </tr>
     @foreach ($best_student as $student)
         <tr>
-            <td>{{ $student->name }}</td>
+            
+            <td>
+                @if (auth()->user()->type == 'App\Models\Manager')
+                    <a href="{{ route('students.show', $student->id) }}">{{ $student->name }}</a>
+
+                @else
+                    {{ $student->name }}
+                @endif
+            </td>
             <td>{{ $student->grades->mean() }}</td>
         </tr>
     @endforeach
