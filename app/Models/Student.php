@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 
 class Student extends User
 {
@@ -26,5 +27,12 @@ class Student extends User
     public function scopeAvailable(Builder $query)
     {
         return $query->whereNull('school_class_id');
+    }
+
+    public function schoolClassCourses() {
+        if ($this->school_class === null) {
+            return new Collection();
+        }
+        return $this->school_class->studyPlan->courses;
     }
 }

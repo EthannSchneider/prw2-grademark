@@ -30,10 +30,8 @@ class GradeController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
-        $courses = Student::find(Auth::id())->school_class()->first()->studyPlan()->first()->courses;
-        
-        return view('grades.create', ['grade' => new Grade(), 'courses' => $courses]);
+    {        
+        return view('grades.create', ['grade' => new Grade(), 'courses' => Student::find(Auth::id())->schoolClassCourses()]);
     }
 
     /**
@@ -61,7 +59,7 @@ class GradeController extends Controller
      */
     public function edit(Grade $grade)
     {
-        $courses = Student::find(Auth::id())->school_class()->first()->studyPlan()->first()->courses;
+        $courses = Student::find(Auth::id())->schoolClassCourses();
         return view('grades.edit', compact('grade', 'courses'));
     }
 
