@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
+
 class Student extends User
 {
     protected $table = 'users';
@@ -16,4 +18,13 @@ class Student extends User
         return $this->hasManyThrough(Course::class, Grade::class, 'user_id', 'id', 'id', 'course_id')->distinct();
     }
 
+    public function scopeBestStudent(Builder $query)
+    {
+        return $query->whereHas('grades')
+                     ->get()
+                     ->sortByDesc(function (Student $student) {
+                        return $student->grades->mean();
+                     })
+                     ->take(10);
+    }
 }
