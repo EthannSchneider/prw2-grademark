@@ -4,6 +4,7 @@
 @if (auth()->user()->type == 'App\Models\Student') <a href="{{ route('grades.index') }}">My grades</a> @endif
 @if (auth()->user()->type == 'App\Models\Manager') <a href="{{ route('students.index') }}">Students</a> @endif
 @if (auth()->user()->type == 'App\Models\Manager') <a href="{{ route('study_plans.index') }}">Study plans</a> @endif
+@if (auth()->user()->type == 'App\Models\Manager') <a href="{{ route('school_classes.index') }}">School classes</a> @endif
 
 </div></div>
 </x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Grade;
 use App\Models\Course;
 use App\Models\Student;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,7 +31,9 @@ class GradeController extends Controller
      */
     public function create()
     {
-        return view('grades.create', ['grade' => new Grade(), 'courses' => Course::all()]);
+        $courses = Student::find(Auth::id())->school_class()->first()->studyPlan()->first()->courses;
+        
+        return view('grades.create', ['grade' => new Grade(), 'courses' => $courses]);
     }
 
     /**
@@ -58,7 +61,7 @@ class GradeController extends Controller
      */
     public function edit(Grade $grade)
     {
-        $courses = Course::all();
+        $courses = Student::find(Auth::id())->school_class()->first()->studyPlan()->first()->courses;
         return view('grades.edit', compact('grade', 'courses'));
     }
 
